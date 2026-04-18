@@ -1,0 +1,258 @@
+PYACCSHAREDMEMORY REFERENCE
+
+MAIN CLASS
+accSharedMemory()
+
+MAIN METHODS
+accSharedMemory()
+- Opens the ACC shared memory blocks
+
+read_shared_memory()
+- Reads ACC shared memory
+- Returns an ACC_map object
+- Returns None if the library thinks physics has not changed
+
+get_shared_memory_data()
+- Keeps trying until data is available
+- Returns ACC_map
+- Raises timeout if nothing is read
+
+close()
+- Closes the shared memory connection
+
+
+TOP LEVEL RETURN OBJECT
+ACC_map
+
+ACC_map contains:
+- Physics
+- Graphics
+- Static
+
+
+========================
+PHYSICS MAP
+sm.Physics
+========================
+
+packed_id
+gas
+brake
+fuel
+gear
+rpm
+steer_angle
+speed_kmh
+velocity
+g_force
+wheel_slip
+wheel_pressure
+wheel_angular_s
+tyre_core_temp
+suspension_travel
+tc
+heading
+pitch
+roll
+car_damage
+pit_limiter_on
+abs
+autoshifter_on
+turbo_boost
+air_temp
+road_temp
+local_angular_vel
+final_ff
+brake_temp
+clutch
+is_ai_controlled
+tyre_contact_point
+tyre_contact_normal
+tyre_contact_heading
+brake_bias
+local_velocity
+slip_ratio
+slip_angle
+suspension_damage
+water_temp
+brake_pressure
+front_brake_compound
+rear_brake_compound
+pad_life
+disc_life
+ignition_on
+starter_engine_on
+is_engine_running
+kerb_vibration
+slip_vibration
+g_vibration
+abs_vibration
+
+
+========================
+GRAPHICS MAP
+sm.Graphics
+========================
+
+packed_id
+status
+session_type
+current_time_str
+last_time_str
+best_time_str
+last_sector_time_str
+completed_lap
+position
+current_time
+last_time
+best_time
+session_time_left
+distance_traveled
+is_in_pit
+current_sector_index
+last_sector_time
+number_of_laps
+tyre_compound
+normalized_car_position
+active_cars
+car_coordinates
+car_id
+player_car_id
+penalty_time
+flag
+penalty
+ideal_line_on
+is_in_pit_lane
+mandatory_pit_done
+wind_speed
+wind_direction
+is_setup_menu_visible
+main_display_index
+secondary_display_index
+tc_level
+tc_cut_level
+engine_map
+abs_level
+fuel_per_lap
+rain_light
+flashing_light
+light_stage
+exhaust_temp
+wiper_stage
+driver_stint_total_time_left
+driver_stint_time_left
+rain_tyres
+session_index
+used_fuel
+delta_lap_time_str
+delta_lap_time
+estimated_lap_time_str
+estimated_lap_time
+is_delta_positive
+is_valid_lap
+fuel_estimated_laps
+track_status
+missing_mandatory_pits
+clock
+direction_light_left
+direction_light_right
+global_yellow
+global_yellow_s1
+global_yellow_s2
+global_yellow_s3
+global_white
+global_green
+global_chequered
+global_red
+mfd_tyre_set
+mfd_fuel_to_add
+mfd_tyre_pressure
+track_grip_status
+rain_intensity
+rain_intensity_in_10min
+rain_intensity_in_30min
+current_tyre_set
+strategy_tyre_set
+gap_ahead
+gap_behind
+
+
+========================
+STATIC MAP
+sm.Static
+========================
+
+sm_version
+ac_version
+number_of_session
+num_cars
+car_model
+track
+player_name
+player_surname
+player_nick
+sector_count
+max_rpm
+max_fuel
+penalty_enabled
+aid_fuel_rate
+aid_tyre_rate
+aid_mechanical_damage
+aid_stability
+aid_auto_clutch
+pit_window_start
+pit_window_end
+is_online
+dry_tyres_name
+wet_tyres_name
+
+
+========================
+NESTED DATA TYPES
+========================
+
+Wheels
+- front_left
+- front_right
+- rear_left
+- rear_right
+
+Vector3f
+- x
+- y
+- z
+
+ContactPoint
+- front_left
+- front_right
+- rear_left
+- rear_right
+
+CarDamage
+- front
+- rear
+- left
+- right
+- center
+
+
+========================
+COMMON EXAMPLES
+========================
+
+sm.Physics.speed_kmh
+sm.Physics.fuel
+sm.Physics.rpm
+sm.Physics.tyre_core_temp.front_left
+sm.Physics.wheel_pressure.rear_right
+
+sm.Graphics.position
+sm.Graphics.fuel_estimated_laps
+sm.Graphics.rain_intensity
+sm.Graphics.flag
+sm.Graphics.gap_ahead
+sm.Graphics.gap_behind
+
+sm.Static.track
+sm.Static.car_model
+sm.Static.max_rpm
