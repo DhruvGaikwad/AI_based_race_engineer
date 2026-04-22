@@ -5,3 +5,6 @@ It can also act as your personal "On the Pit Wall" race enginner that responds t
 *WHAT IS MY FASTEST LAP , ETC 
 This is a first version of the code that is very primitive and a prototype 
 The project uses accSharedMemory by rrennoir to read the telemetry from the game 
+
+
+23/04/26-Pushed updated code with fuel report and lap Tracking 
