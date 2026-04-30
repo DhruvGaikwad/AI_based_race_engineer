@@ -81,6 +81,7 @@ fastest_lap_number = None
 compared_lap_number = None
 last_lost_sector = None
 
+previous_lap_valid = None
 
 def lap_tracking(sm):
     global previous_sector, previous_completed_laps
@@ -163,8 +164,20 @@ def fuel_report(sm):
 
     return "You have enough fuel to finish the race."
 
+def invalid_lap_report(sm):
+    global previous_lap_valid
+    current_lap_valid = sm.Graphics.is_valid_lap
+
+    if previous_lap_valid is None:
+        previous_lap_valid = current_lap_valid
+        return
 
 
+    if previous_lap_valid == True:
+        if current_lap_valid == False:
+            speak("Your last lap was invalid.")
+
+    previous_lap_valid = current_lap_valid
 
 mic_ready = print_microphone_status()
 listener = threading.Thread(target=listen_loop, daemon=True)
@@ -179,17 +192,17 @@ try:
 
         if sm is not None:
             latest_sm = sm
+
             lap_tracking(latest_sm)
+            invalid_lap_report(latest_sm)
 
         if latest_command and latest_sm is not None:
             command = latest_command
             latest_command = None
                                     #we use .1f to round to 1 decimal place, and .0f to round to whole number
                                     #we also divide gap times by 1000 to convert from milliseconds to seconds
-            if "fuel" in command:
-                speak(f"Estimated fuel laps remaining: {latest_sm.Graphics.fuel_estimated_laps:.1f}")
 
-            elif "speed" in command:
+            if "speed" in command:
                 speak(f"Current speed is {latest_sm.Physics.speed_kmh:.0f} kilometers per hour")
 
             elif "position" in command:
@@ -203,7 +216,7 @@ try:
                 gap_behind = latest_sm.Graphics.gap_behind / 1000
                 speak(f"Gap behind is {gap_behind:.1f} seconds")
 
-            elif "last lap time " in command :
+            elif "last lap time" in command :
                 lap_time =latest_sm.Graphics.last_time / 1000
                 speak(f"last lap time was {lap_time:.1f} seconds ")
             
@@ -211,7 +224,7 @@ try:
                 best_lap=latest_sm.Graphics.best_time / 1000
                 speak(f"best time so far is {best_lap:.1f} seconds")
 
-            elif "fuel needed " in command:
+            elif "fuel" in command:
                 speak(fuel_report(latest_sm))
             
             elif "time loss" in command or "lap gap" in command or "sector gap" in command:
@@ -230,7 +243,10 @@ try:
 
 
             elif "rain" in command:
-                speak(f"Rain intensity is {latest_sm.Graphics.rain_intensity.name}")
+                rain_intensity = latest_sm.Graphics.rain_intensity
+                if hasattr(rain_intensity, "name"):
+                    rain_intensity = rain_intensity.name
+                speak(f"Rain intensity is {rain_intensity}")
 
             
 

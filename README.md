@@ -1,10 +1,73 @@
-this is a local "AI" race engineer that reads incomming telementry from AssettoCorsa Competizione and then uses that telementry data to help with driver performance and gives feedback based on that performance.
-It can also act as your personal "On the Pit Wall" race enginner that responds to your questions/queries like
-*WHAT IS MY POSITION
-*WHAT THE GAP BEHIND
-*WHAT IS MY FASTEST LAP , ETC 
-This is a first version of the code that is very primitive and a prototype 
-The project uses accSharedMemory by rrennoir to read the telemetry from the game 
+# AI Race Engineer
 
+A local prototype race engineer for Assetto Corsa Competizione.
 
-23/04/26-Pushed updated code with fuel report and lap Tracking 
+The app reads live ACC shared memory telemetry and responds through voice output. It can answer spoken driver questions and also trigger automatic alerts from live telemetry, such as lap invalidation.
+
+## Current Features
+
+- Reads live telemetry from Assetto Corsa Competizione.
+- Listens for voice commands through your microphone.
+- Replies using text-to-speech.
+- Reports current speed.
+- Reports race position.
+- Reports the gap ahead and gap behind.
+- Reports last lap time and best lap time.
+- Estimates whether you have enough fuel to finish.
+- Tracks lap and sector deltas against your fastest tracked lap.
+- Alerts when the current lap becomes invalid.
+- Reports rain intensity.
+
+## Requirements
+
+- Windows
+- Python 3
+- Assetto Corsa Competizione
+- A working microphone
+- ACC shared memory enabled through the game
+
+This project uses `pyaccsharedmemory`, which is based on the ACC shared memory interface.
+
+## Setup
+
+Create and activate a virtual environment:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+## Run
+
+Start Assetto Corsa Competizione first, then run:
+
+```powershell
+python engineer\engineer.py
+```
+
+The app will print detected microphones, start listening for commands, and speak engineer responses when telemetry is available.
+
+## Example Commands
+
+- "speed"
+- "position"
+- "gap ahead"
+- "gap behind"
+- "last lap time"
+- "best lap time"
+- "fuel"
+- "time loss"
+- "sector gap"
+- "rain"
+
+## Project Status
+
+This is an early prototype. The code is intentionally simple while the core race engineer behavior is being developed.
+
+23/04/26: Updated code with fuel report and lap tracking.
