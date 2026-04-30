@@ -71,3 +71,4 @@ The app will print detected microphones, start listening for commands, and speak
 This is an early prototype. The code is intentionally simple while the core race engineer behavior is being developed.
 
 23/04/26: Updated code with fuel report and lap tracking.
+30/04/26: Added Invalid lap function 
